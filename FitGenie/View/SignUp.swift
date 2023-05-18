@@ -1,13 +1,13 @@
 import UIKit
 
-class SignIn: UIViewController {
-    
+class SignUp: UIViewController {
+
     let welcome : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 35)
         label.textColor = .black
-        label.text = "Welcome to FitGenie"
+        label.text = "Create an account"
         label.textAlignment = .center
         return label
     }()
@@ -50,7 +50,7 @@ class SignIn: UIViewController {
     
     let signin: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign in", for: .normal)
+        button.setTitle("Sign up", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
@@ -71,7 +71,7 @@ class SignIn: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
         label.textColor = .black
-        label.text = "Or sign in with"
+        label.text = "Or sign up with"
         label.textAlignment = .center
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         return label
@@ -89,8 +89,8 @@ class SignIn: UIViewController {
         button.setTitle("     Continue with Google", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
-        button.layer.borderWidth = 0.2
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.layer.borderWidth = 0.2
         button.setImage(UIImage(named: "Google"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -113,7 +113,7 @@ class SignIn: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
         label.textColor = .black
-        label.text = "Don't have an account?"
+        label.text = "Already have an account?"
         label.textAlignment = .center
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         return label
@@ -121,7 +121,7 @@ class SignIn: UIViewController {
     
     let signup : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign up", for: .normal)
+        button.setTitle("Sign in", for: .normal)
         button.backgroundColor = UIColor(red: 232/255, green: 207/255, blue: 190/255, alpha: 1.0)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -164,7 +164,6 @@ class SignIn: UIViewController {
         view.addSubview(hStack)
         
         signup.addTarget(self, action: #selector(go), for: .touchUpInside)
-        
         
         hStack.addArrangedSubview(label2)
         hStack.addArrangedSubview(signup)
@@ -228,14 +227,16 @@ class SignIn: UIViewController {
             apple.heightAnchor.constraint(equalToConstant: 45),
             
             hStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 620),
-            hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 42),
+            hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -45),
             hStack.heightAnchor.constraint(equalToConstant: 55),
         
         ])
         
     }
+    
     @objc func go(){
-            navigationController?.pushViewController(SignUp(), animated: true)
+            navigationController?.pushViewController(SignIn(), animated: true)
         }
+
 }

@@ -7,23 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECAD56A829D444D6007FE772 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECAD56A729D444D6007FE772 /* Asset.xcassets */; };
+		ECAD56AA29D491D2007FE772 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAD56A929D491D2007FE772 /* SignUp.swift */; };
+		ECB3BFFF2A139EB400C34C51 /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3BFFE2A139EB400C34C51 /* Age.swift */; };
+		ECB3C0032A14183E00C34C51 /* HeightAndWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */; };
+		ECB3C0072A141D6100C34C51 /* ActivityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */; };
+		ECB3C0092A14235800C34C51 /* FitnessGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0082A14235800C34C51 /* FitnessGoal.swift */; };
+		ECB3C00E2A15F0AC00C34C51 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ECB3C00D2A15F0AC00C34C51 /* SnapKit */; };
 		ECB512C529D17C36006F9D80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C429D17C36006F9D80 /* AppDelegate.swift */; };
 		ECB512C729D17C36006F9D80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C629D17C36006F9D80 /* SceneDelegate.swift */; };
 		ECB512C929D17C36006F9D80 /* FirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C829D17C36006F9D80 /* FirstScreen.swift */; };
-		ECB512CE29D17C37006F9D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECB512CD29D17C37006F9D80 /* Assets.xcassets */; };
 		ECB512D129D17C37006F9D80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB512CF29D17C37006F9D80 /* LaunchScreen.storyboard */; };
 		ECB512DD29D1CF0D006F9D80 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512DC29D1CF0D006F9D80 /* SignIn.swift */; };
+		ECC6F4B22A0BDEB7007FE988 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6F4B12A0BDEB7007FE988 /* Gender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECAD56A729D444D6007FE772 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		ECAD56A929D491D2007FE772 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		ECB3BFFE2A139EB400C34C51 /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
+		ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightAndWeight.swift; sourceTree = "<group>"; };
+		ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevel.swift; sourceTree = "<group>"; };
+		ECB3C0082A14235800C34C51 /* FitnessGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessGoal.swift; sourceTree = "<group>"; };
 		ECB512C129D17C36006F9D80 /* FitGenie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitGenie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB512C429D17C36006F9D80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECB512C629D17C36006F9D80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ECB512C829D17C36006F9D80 /* FirstScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreen.swift; sourceTree = "<group>"; };
-		ECB512CD29D17C37006F9D80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECB512D029D17C37006F9D80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECB512D229D17C37006F9D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECB512DC29D1CF0D006F9D80 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		ECC6F4B12A0BDEB7007FE988 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB3C00E2A15F0AC00C34C51 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,9 +72,9 @@
 			children = (
 				ECB512D929D17E61006F9D80 /* Other */,
 				ECB512D829D17E4D006F9D80 /* View */,
-				ECB512CD29D17C37006F9D80 /* Assets.xcassets */,
 				ECB512CF29D17C37006F9D80 /* LaunchScreen.storyboard */,
 				ECB512D229D17C37006F9D80 /* Info.plist */,
+				ECAD56A729D444D6007FE772 /* Asset.xcassets */,
 			);
 			path = FitGenie;
 			sourceTree = "<group>";
@@ -70,6 +84,12 @@
 			children = (
 				ECB512C829D17C36006F9D80 /* FirstScreen.swift */,
 				ECB512DC29D1CF0D006F9D80 /* SignIn.swift */,
+				ECAD56A929D491D2007FE772 /* SignUp.swift */,
+				ECC6F4B12A0BDEB7007FE988 /* Gender.swift */,
+				ECB3BFFE2A139EB400C34C51 /* Age.swift */,
+				ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */,
+				ECB3C0082A14235800C34C51 /* FitnessGoal.swift */,
+				ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +119,9 @@
 			dependencies = (
 			);
 			name = FitGenie;
+			packageProductDependencies = (
+				ECB3C00D2A15F0AC00C34C51 /* SnapKit */,
+			);
 			productName = FitGenie;
 			productReference = ECB512C129D17C36006F9D80 /* FitGenie.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +150,9 @@
 				Base,
 			);
 			mainGroup = ECB512B829D17C36006F9D80;
+			packageReferences = (
+				ECB3C00C2A15F0AC00C34C51 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = ECB512C229D17C36006F9D80 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,8 +167,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECAD56A829D444D6007FE772 /* Asset.xcassets in Resources */,
 				ECB512D129D17C37006F9D80 /* LaunchScreen.storyboard in Resources */,
-				ECB512CE29D17C37006F9D80 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,10 +179,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC6F4B22A0BDEB7007FE988 /* Gender.swift in Sources */,
 				ECB512C929D17C36006F9D80 /* FirstScreen.swift in Sources */,
 				ECB512C529D17C36006F9D80 /* AppDelegate.swift in Sources */,
 				ECB512C729D17C36006F9D80 /* SceneDelegate.swift in Sources */,
 				ECB512DD29D1CF0D006F9D80 /* SignIn.swift in Sources */,
+				ECB3C0032A14183E00C34C51 /* HeightAndWeight.swift in Sources */,
+				ECB3BFFF2A139EB400C34C51 /* Age.swift in Sources */,
+				ECAD56AA29D491D2007FE772 /* SignUp.swift in Sources */,
+				ECB3C0072A141D6100C34C51 /* ActivityLevel.swift in Sources */,
+				ECB3C0092A14235800C34C51 /* FitnessGoal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +396,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ECB3C00C2A15F0AC00C34C51 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ECB3C00D2A15F0AC00C34C51 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECB3C00C2A15F0AC00C34C51 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECB512B929D17C36006F9D80 /* Project object */;
 }
