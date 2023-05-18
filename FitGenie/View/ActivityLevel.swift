@@ -17,7 +17,7 @@ class ActivityLevel: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
-        label.textColor = .black
+        label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         label.text = "Based on your current activity level."
         label.numberOfLines = 3;
         label.textAlignment = .left
@@ -133,7 +133,7 @@ class ActivityLevel: UIViewController {
     }()
     let nextbutton : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Create My Plan", for: .normal)
+        button.setTitle("Continue", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
@@ -169,7 +169,7 @@ class ActivityLevel: UIViewController {
         view.addSubview(ingreateshape2)
         view.addSubview(nextbutton)
         
-        //nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
+       // nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
@@ -242,7 +242,7 @@ class ActivityLevel: UIViewController {
     }
     
     
-
+   
 
 }
 

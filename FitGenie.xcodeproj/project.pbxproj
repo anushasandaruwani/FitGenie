@@ -14,6 +14,12 @@
 		ECB3C0072A141D6100C34C51 /* ActivityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */; };
 		ECB3C0092A14235800C34C51 /* FitnessGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0082A14235800C34C51 /* FitnessGoal.swift */; };
 		ECB3C00E2A15F0AC00C34C51 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ECB3C00D2A15F0AC00C34C51 /* SnapKit */; };
+		ECB3C0162A161D6200C34C51 /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0152A161D6200C34C51 /* BMI.swift */; };
+		ECB3C0182A162E6200C34C51 /* ViewHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0172A162E6200C34C51 /* ViewHomePage.swift */; };
+		ECB3C01A2A166D9000C34C51 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0192A166D9000C34C51 /* CustomCell.swift */; };
+		ECB3C01C2A167D3D00C34C51 /* ViewSchedulePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C01B2A167D3D00C34C51 /* ViewSchedulePage.swift */; };
+		ECB3C01E2A167D5900C34C51 /* ViewProgressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C01D2A167D5900C34C51 /* ViewProgressPage.swift */; };
+		ECB3C0202A167D6D00C34C51 /* ViewProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C01F2A167D6D00C34C51 /* ViewProfilePage.swift */; };
 		ECB512C529D17C36006F9D80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C429D17C36006F9D80 /* AppDelegate.swift */; };
 		ECB512C729D17C36006F9D80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C629D17C36006F9D80 /* SceneDelegate.swift */; };
 		ECB512C929D17C36006F9D80 /* FirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB512C829D17C36006F9D80 /* FirstScreen.swift */; };
@@ -29,6 +35,12 @@
 		ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightAndWeight.swift; sourceTree = "<group>"; };
 		ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevel.swift; sourceTree = "<group>"; };
 		ECB3C0082A14235800C34C51 /* FitnessGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessGoal.swift; sourceTree = "<group>"; };
+		ECB3C0152A161D6200C34C51 /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
+		ECB3C0172A162E6200C34C51 /* ViewHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHomePage.swift; sourceTree = "<group>"; };
+		ECB3C0192A166D9000C34C51 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		ECB3C01B2A167D3D00C34C51 /* ViewSchedulePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSchedulePage.swift; sourceTree = "<group>"; };
+		ECB3C01D2A167D5900C34C51 /* ViewProgressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProgressPage.swift; sourceTree = "<group>"; };
+		ECB3C01F2A167D6D00C34C51 /* ViewProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfilePage.swift; sourceTree = "<group>"; };
 		ECB512C129D17C36006F9D80 /* FitGenie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitGenie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB512C429D17C36006F9D80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECB512C629D17C36006F9D80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +87,7 @@
 				ECB512CF29D17C37006F9D80 /* LaunchScreen.storyboard */,
 				ECB512D229D17C37006F9D80 /* Info.plist */,
 				ECAD56A729D444D6007FE772 /* Asset.xcassets */,
+				ECB3C0192A166D9000C34C51 /* CustomCell.swift */,
 			);
 			path = FitGenie;
 			sourceTree = "<group>";
@@ -90,6 +103,11 @@
 				ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */,
 				ECB3C0082A14235800C34C51 /* FitnessGoal.swift */,
 				ECB3C0062A141D6100C34C51 /* ActivityLevel.swift */,
+				ECB3C0152A161D6200C34C51 /* BMI.swift */,
+				ECB3C0172A162E6200C34C51 /* ViewHomePage.swift */,
+				ECB3C01B2A167D3D00C34C51 /* ViewSchedulePage.swift */,
+				ECB3C01D2A167D5900C34C51 /* ViewProgressPage.swift */,
+				ECB3C01F2A167D6D00C34C51 /* ViewProfilePage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,14 +198,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECC6F4B22A0BDEB7007FE988 /* Gender.swift in Sources */,
+				ECB3C01A2A166D9000C34C51 /* CustomCell.swift in Sources */,
 				ECB512C929D17C36006F9D80 /* FirstScreen.swift in Sources */,
+				ECB3C0162A161D6200C34C51 /* BMI.swift in Sources */,
+				ECB3C01C2A167D3D00C34C51 /* ViewSchedulePage.swift in Sources */,
 				ECB512C529D17C36006F9D80 /* AppDelegate.swift in Sources */,
 				ECB512C729D17C36006F9D80 /* SceneDelegate.swift in Sources */,
 				ECB512DD29D1CF0D006F9D80 /* SignIn.swift in Sources */,
+				ECB3C01E2A167D5900C34C51 /* ViewProgressPage.swift in Sources */,
+				ECB3C0202A167D6D00C34C51 /* ViewProfilePage.swift in Sources */,
 				ECB3C0032A14183E00C34C51 /* HeightAndWeight.swift in Sources */,
 				ECB3BFFF2A139EB400C34C51 /* Age.swift in Sources */,
 				ECAD56AA29D491D2007FE772 /* SignUp.swift in Sources */,
 				ECB3C0072A141D6100C34C51 /* ActivityLevel.swift in Sources */,
+				ECB3C0182A162E6200C34C51 /* ViewHomePage.swift in Sources */,
 				ECB3C0092A14235800C34C51 /* FitnessGoal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

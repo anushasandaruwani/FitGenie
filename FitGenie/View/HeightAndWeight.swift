@@ -17,7 +17,7 @@ class HeightAndWeight: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
-        label.textColor = .black
+        label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         label.text = "We need this information to create the best possible plan for you."
         label.numberOfLines = 3;
         label.textAlignment = .left
