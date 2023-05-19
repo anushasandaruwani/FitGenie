@@ -171,6 +171,11 @@ class FitnessGoal: UIViewController {
         
         nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
         
+        stayhealthy.addTarget(self, action: #selector(select1), for: .touchUpInside)
+        getfit.addTarget(self, action: #selector(select2), for: .touchUpInside)
+        buildmuscle.addTarget(self, action: #selector(select3), for: .touchUpInside)
+        loseweight.addTarget(self, action: #selector(select4), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             
             fitnessgoal.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -243,6 +248,40 @@ class FitnessGoal: UIViewController {
     @objc func go(){
             navigationController?.pushViewController(ActivityLevel(), animated: true)
         }
+    @objc func select1(){
+        stayhealthy.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        getfit.backgroundColor = .clear
+        buildmuscle.backgroundColor = .clear
+        loseweight.backgroundColor = .clear
+        
+        
+    }
+    
+    @objc func select2(){
+        stayhealthy.backgroundColor = .clear
+        getfit.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        buildmuscle.backgroundColor = .clear
+        loseweight.backgroundColor = .clear
+        
+        
+    }
+    @objc func select3(){
+        stayhealthy.backgroundColor = .clear
+        getfit.backgroundColor = .clear
+        buildmuscle.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        loseweight.backgroundColor = .clear
+        
+        
+    }
+    
+    @objc func select4(){
+        stayhealthy.backgroundColor = .clear
+        getfit.backgroundColor = .clear
+        buildmuscle.backgroundColor = .clear
+        loseweight.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        
+        
+    }
 }
     
 

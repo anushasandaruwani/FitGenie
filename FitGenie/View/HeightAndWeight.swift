@@ -38,6 +38,10 @@ class HeightAndWeight: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 40, weight: .bold)
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
         return textField
         }()
     
@@ -56,6 +60,10 @@ class HeightAndWeight: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 40, weight: .bold)
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
         return textField
         }()
     let nextbutton : UIButton = {
@@ -124,6 +132,18 @@ class HeightAndWeight: UIViewController {
         
     }
     @objc func go(){
+        let wString = weightbox.text!
+        let hString = heightbox.text!
+        
+        let wDouble = Double(wString)
+        let hDouble = Double(hString)
+        
+        
+        let data = UserDefaults.standard
+        data.set(wDouble, forKey: "weight")
+        data.set(hDouble, forKey: "height")
+        
+        
             navigationController?.pushViewController(FitnessGoal(), animated: true)
         }
 

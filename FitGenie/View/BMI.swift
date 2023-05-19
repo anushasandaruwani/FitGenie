@@ -33,12 +33,13 @@ class BMI: UIViewController {
     let yourBMI : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18)
+        label.font = .systemFont(ofSize: 40, weight: .bold)
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.cornerRadius = 5
         label.clipsToBounds = true
-        label.textAlignment = .left
+        label.textAlignment = .center
+        label.textColor = .black
         return label
     }()
     
@@ -75,8 +76,38 @@ class BMI: UIViewController {
         super.viewDidLoad()
         
         setUI()
-
+        calBMI()
  
+    }
+    
+    func calBMI(){
+        let data = UserDefaults.standard
+        
+        let w = data.double(forKey: "weight")
+        let h = data.double(forKey: "height")
+        
+        let bmi = (w/h/h) * 10000
+        
+        let bmiStr = String(format: "%.2f", bmi)
+        
+        data.set(bmiStr, forKey: "bmi")
+        
+        //let bm = data.string(forKey: "bmi")
+        
+        yourBMI.text = String(bmiStr)
+        
+        if(bmi<18.5){
+            print("underweight")
+        }
+        else if(bmi<24.9){
+            print("normal")
+        }
+        else  if(bmi<34.9){
+            print("overweight")
+        }
+        else{
+            print("weight:",w,":","heught:",h,"bmi",bmi)
+        }
     }
     
     func setUI(){

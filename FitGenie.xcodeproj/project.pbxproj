@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC0ED3362A178C94008096FE /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0ED3352A178C94008096FE /* Asset.xcassets */; };
+		EC0ED3382A17C1F3008096FE /* PlayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0ED3372A17C1F3008096FE /* PlayVideo.swift */; };
 		ECAD56AA29D491D2007FE772 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAD56A929D491D2007FE772 /* SignUp.swift */; };
 		ECB3BFFF2A139EB400C34C51 /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3BFFE2A139EB400C34C51 /* Age.swift */; };
 		ECB3C0032A14183E00C34C51 /* HeightAndWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		EC0ED3352A178C94008096FE /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		EC0ED3372A17C1F3008096FE /* PlayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideo.swift; sourceTree = "<group>"; };
 		ECAD56A929D491D2007FE772 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		ECB3BFFE2A139EB400C34C51 /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
 		ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightAndWeight.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				ECB3C01B2A167D3D00C34C51 /* ViewSchedulePage.swift */,
 				ECB3C01D2A167D5900C34C51 /* ViewProgressPage.swift */,
 				ECB3C01F2A167D6D00C34C51 /* ViewProfilePage.swift */,
+				EC0ED3372A17C1F3008096FE /* PlayVideo.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				ECB512C929D17C36006F9D80 /* FirstScreen.swift in Sources */,
 				ECB3C0162A161D6200C34C51 /* BMI.swift in Sources */,
 				ECB3C01C2A167D3D00C34C51 /* ViewSchedulePage.swift in Sources */,
+				EC0ED3382A17C1F3008096FE /* PlayVideo.swift in Sources */,
 				ECB512C529D17C36006F9D80 /* AppDelegate.swift in Sources */,
 				ECB512C729D17C36006F9D80 /* SceneDelegate.swift in Sources */,
 				ECB512DD29D1CF0D006F9D80 /* SignIn.swift in Sources */,

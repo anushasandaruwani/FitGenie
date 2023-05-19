@@ -30,7 +30,7 @@ class ActivityLevel: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let beginner1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +57,7 @@ class ActivityLevel: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let moderatelyfit1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ class ActivityLevel: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let fit1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ class ActivityLevel: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let ingreateshape1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -141,16 +141,16 @@ class ActivityLevel: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
-
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
     }
     func setUI(){
-    
+        
         view.backgroundColor = .systemBackground
         
         view.addSubview(activitylevel)
@@ -170,6 +170,12 @@ class ActivityLevel: UIViewController {
         view.addSubview(nextbutton)
         
         nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
+        
+        beginner.addTarget(self, action: #selector(level1), for: .touchUpInside)
+        moderatelyfit.addTarget(self, action: #selector(level2), for: .touchUpInside)
+        fit.addTarget(self, action: #selector(level3), for: .touchUpInside)
+        ingreateshape.addTarget(self, action: #selector(level4), for: .touchUpInside)
+        
         
         NSLayoutConstraint.activate([
             
@@ -241,10 +247,43 @@ class ActivityLevel: UIViewController {
         ])
     }
     @objc func go(){
-            navigationController?.pushViewController(BMI(), animated: true)
-        }
+        navigationController?.pushViewController(BMI(), animated: true)
+    }
     
-   
-
+    @objc func level1(){
+        beginner.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        moderatelyfit.backgroundColor = .clear
+        fit.backgroundColor = .clear
+        ingreateshape.backgroundColor = .clear
+        
+        
+    }
+    
+    @objc func level2(){
+        beginner.backgroundColor = .clear
+        moderatelyfit.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        fit.backgroundColor = .clear
+        ingreateshape.backgroundColor = .clear
+        
+        
+    }
+    @objc func level3(){
+        beginner.backgroundColor = .clear
+        moderatelyfit.backgroundColor = .clear
+        fit.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        ingreateshape.backgroundColor = .clear
+        
+        
+    }
+    
+    @objc func level4(){
+        beginner.backgroundColor = .clear
+        moderatelyfit.backgroundColor = .clear
+        fit.backgroundColor = .clear
+        ingreateshape.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
+        
+        
+    }
+    
 }
 

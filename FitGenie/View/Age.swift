@@ -37,13 +37,16 @@ class Age: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
 
     let agebox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 40, weight: .bold)
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
         return textField
         }()
     let nextbutton : UIButton = {
