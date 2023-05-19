@@ -169,7 +169,7 @@ class ActivityLevel: UIViewController {
         view.addSubview(ingreateshape2)
         view.addSubview(nextbutton)
         
-       // nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
+        nextbutton.addTarget(self, action: #selector(go), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
@@ -240,7 +240,9 @@ class ActivityLevel: UIViewController {
             
         ])
     }
-    
+    @objc func go(){
+            navigationController?.pushViewController(BMI(), animated: true)
+        }
     
    
 

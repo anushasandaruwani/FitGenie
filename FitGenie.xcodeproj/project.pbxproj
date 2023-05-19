@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ECAD56A829D444D6007FE772 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECAD56A729D444D6007FE772 /* Asset.xcassets */; };
+		EC0ED3362A178C94008096FE /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0ED3352A178C94008096FE /* Asset.xcassets */; };
 		ECAD56AA29D491D2007FE772 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAD56A929D491D2007FE772 /* SignUp.swift */; };
 		ECB3BFFF2A139EB400C34C51 /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3BFFE2A139EB400C34C51 /* Age.swift */; };
 		ECB3C0032A14183E00C34C51 /* HeightAndWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ECAD56A729D444D6007FE772 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		EC0ED3352A178C94008096FE /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		ECAD56A929D491D2007FE772 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		ECB3BFFE2A139EB400C34C51 /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
 		ECB3C0022A14183E00C34C51 /* HeightAndWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightAndWeight.swift; sourceTree = "<group>"; };
@@ -82,11 +82,11 @@
 		ECB512C329D17C36006F9D80 /* FitGenie */ = {
 			isa = PBXGroup;
 			children = (
+				EC0ED3352A178C94008096FE /* Asset.xcassets */,
 				ECB512D929D17E61006F9D80 /* Other */,
 				ECB512D829D17E4D006F9D80 /* View */,
 				ECB512CF29D17C37006F9D80 /* LaunchScreen.storyboard */,
 				ECB512D229D17C37006F9D80 /* Info.plist */,
-				ECAD56A729D444D6007FE772 /* Asset.xcassets */,
 				ECB3C0192A166D9000C34C51 /* CustomCell.swift */,
 			);
 			path = FitGenie;
@@ -185,7 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECAD56A829D444D6007FE772 /* Asset.xcassets in Resources */,
+				EC0ED3362A178C94008096FE /* Asset.xcassets in Resources */,
 				ECB512D129D17C37006F9D80 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
