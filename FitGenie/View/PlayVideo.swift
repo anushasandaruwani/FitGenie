@@ -4,6 +4,8 @@ import SnapKit
 
 class PlayVideo: UIViewController {
     
+    var video:String = "N-15wUPnqpc"
+    
     let webView: WKWebView = {
            let webView = WKWebView()
             webView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +44,7 @@ class PlayVideo: UIViewController {
 
     
     func youtubeVideoView(){
-        let videoId = "N-15wUPnqpc"
+        let videoId = video
         let embedHTML = "<html><body><iframe width=\"980\" height=\"500\"src=\"https://www.youtube.com/embed/\(videoId)?playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
         webView.loadHTMLString(embedHTML, baseURL: nil)
         

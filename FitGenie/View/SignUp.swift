@@ -30,6 +30,50 @@ class SignUp: UIViewController {
         return imageView
         }()
     
+    let email : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 18)
+        label.textColor = UIColor(red: 95/255, green: 95/255, blue: 91/255, alpha: 1.0)
+        label.text = "Email"
+        label.textAlignment = .left
+        return label
+    }()
+
+    let emailbox : UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderWidth = 0.2
+        textField.layer.cornerRadius = 8
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 40, weight: .bold)
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
+        return textField
+        }()
+    
+    let password : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 18)
+        label.textColor = UIColor(red: 95/255, green: 95/255, blue: 91/255, alpha: 1.0)
+        label.text = "Password"
+        label.textAlignment = .left
+        return label
+    }()
+
+    let passwordbox : UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderWidth = 0.2
+        textField.layer.cornerRadius = 8
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 40, weight: .bold)
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
+        return textField
+        }()
+    
     let google: UIButton = {
         let button = UIButton()
         button.setTitle("     Continue with Google", for: .normal)
@@ -99,6 +143,10 @@ class SignUp: UIViewController {
         view.addSubview(welcome)
         view.addSubview(label)
         view.addSubview(signUpImage)
+        view.addSubview(email)
+        view.addSubview(emailbox)
+        view.addSubview(password)
+        view.addSubview(passwordbox)
         view.addSubview(google)
         view.addSubview(apple)
         view.addSubview(hStack)
@@ -125,20 +173,38 @@ class SignUp: UIViewController {
             signUpImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
             signUpImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             signUpImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            signUpImage.heightAnchor.constraint(equalToConstant: 300),
-            signUpImage.widthAnchor.constraint(equalToConstant: 300),
+            signUpImage.heightAnchor.constraint(equalToConstant: 250),
+            signUpImage.widthAnchor.constraint(equalToConstant: 250),
             
-            google.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 470),
-            google.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            google.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-            google.heightAnchor.constraint(equalToConstant: 45),
+            email.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 370),
+            email.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            email.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
-            apple.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 540),
-            apple.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            apple.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-            apple.heightAnchor.constraint(equalToConstant: 45),
+            emailbox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 400),
+            emailbox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            emailbox.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            emailbox.heightAnchor.constraint(equalToConstant: 50),
             
-            hStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 620),
+            password.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 470),
+            password.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            password.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            passwordbox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 500),
+            passwordbox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            passwordbox.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            passwordbox.heightAnchor.constraint(equalToConstant: 50),
+            
+//            google.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 470),
+//            google.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+//            google.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+//            google.heightAnchor.constraint(equalToConstant: 45),
+//            
+//            apple.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 540),
+//            apple.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+//            apple.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+//            apple.heightAnchor.constraint(equalToConstant: 45),
+            
+            hStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 600),
             hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 42),
             hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -45),
             hStack.heightAnchor.constraint(equalToConstant: 55),
