@@ -71,7 +71,7 @@ class ViewProfilePage: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
-        label.text = "Height"
+        label.text = "Height(cm)"
         return label
         }()
     
@@ -89,7 +89,7 @@ class ViewProfilePage: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
-        label.text = "Weight"
+        label.text = "Weight(kg)"
         return label
         }()
     

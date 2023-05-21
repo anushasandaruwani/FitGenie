@@ -46,9 +46,8 @@ class SignUp: UIViewController {
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
-        textField.font = .systemFont(ofSize: 40, weight: .bold)
-        textField.textAlignment = .center
-        textField.keyboardType = .numberPad
+        textField.font = .systemFont(ofSize: 15)
+        textField.textAlignment = .left
         return textField
         }()
     
@@ -68,9 +67,8 @@ class SignUp: UIViewController {
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
-        textField.font = .systemFont(ofSize: 40, weight: .bold)
-        textField.textAlignment = .center
-        textField.keyboardType = .numberPad
+        textField.font = .systemFont(ofSize: 15)
+        textField.textAlignment = .left
         return textField
         }()
     
