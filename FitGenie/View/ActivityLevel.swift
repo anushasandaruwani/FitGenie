@@ -2,6 +2,9 @@ import UIKit
 
 class ActivityLevel: UIViewController {
     
+    var activityLvl : String = ""
+
+    
     let activitylevel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -246,7 +249,22 @@ class ActivityLevel: UIViewController {
             
         ])
     }
+
     @objc func go(){
+        if(activityLvl.isEmpty){
+                    let alert = UIAlertController(title: "Missing Activty Level", message: "Please choose your Activity Level", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert, animated: true, completion: nil)
+                }
+                else{
+                    
+//                    data.set(level, forKey: "Level")
+                    
+                    let vc = BMI()
+                    navigationController?.pushViewController(vc, animated: true)
+                    
+                }
         navigationController?.pushViewController(BMI(), animated: true)
     }
     
@@ -256,7 +274,7 @@ class ActivityLevel: UIViewController {
         fit.backgroundColor = .clear
         ingreateshape.backgroundColor = .clear
         
-        
+        activityLvl = "Absolute Beginner"
     }
     
     @objc func level2(){
@@ -265,6 +283,7 @@ class ActivityLevel: UIViewController {
         fit.backgroundColor = .clear
         ingreateshape.backgroundColor = .clear
         
+        activityLvl = "Moderately fit"
         
     }
     @objc func level3(){
@@ -273,7 +292,7 @@ class ActivityLevel: UIViewController {
         fit.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         ingreateshape.backgroundColor = .clear
         
-        
+        activityLvl = "Fit"
     }
     
     @objc func level4(){
@@ -282,7 +301,7 @@ class ActivityLevel: UIViewController {
         fit.backgroundColor = .clear
         ingreateshape.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         
-        
+        activityLvl = "In Greate Shape"
     }
     
 }

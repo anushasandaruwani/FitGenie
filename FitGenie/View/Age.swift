@@ -113,6 +113,20 @@ class Age: UIViewController {
         
     }
     @objc func go(){
+        
+    
+                guard let ageString = agebox.text, let age = Int(ageString), age >= 0 && age <= 100 else {
+                    let alert = UIAlertController(title: "Invalid Age", message: "Please enter a valid age.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+        
+        let data = UserDefaults.standard
+        
+        data.set(agebox.text, forKey: "Age")
+        
             navigationController?.pushViewController(HeightAndWeight(), animated: true)
         }
 

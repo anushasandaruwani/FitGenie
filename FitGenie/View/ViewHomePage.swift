@@ -223,9 +223,9 @@ class ViewHomePage: UIViewController {
         
         @objc func getNext(name:String,desc:String,video:String) {
             let vc = PlayVideo()
-            vc.videoname.text = name
-            vc.videodescription.text = desc
-            vc.video = video
+            vc.labelWorkout.text = name
+            vc.labelDesc.text = desc
+            vc.videoId = video
             
             navigationController?.pushViewController(vc, animated: true)
         }

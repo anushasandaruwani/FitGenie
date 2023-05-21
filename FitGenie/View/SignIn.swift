@@ -73,29 +73,17 @@ class SignIn: UIViewController {
         return imageView
         }()
     
-//    let google: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("     Continue with Google", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.layer.cornerRadius = 5
-//        button.layer.borderWidth = 0.2
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-//        button.setImage(UIImage(named: "Google"), for: .normal)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//        }()
-//    
-//    let apple: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("  Continue with Apple", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.layer.cornerRadius = 5
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-//        button.layer.borderWidth = 0.2
-//        button.setImage(UIImage(named: "Apple"), for: .normal)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//        }()
+    let signin : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign In", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.backgroundColor = UIColor(red: 232/255, green: 207/255, blue: 190/255, alpha: 1.0)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     let label2 : UILabel = {
         let label = UILabel()
@@ -110,7 +98,7 @@ class SignIn: UIViewController {
     
     let signup : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign up", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor(red: 232/255, green: 207/255, blue: 190/255, alpha: 1.0)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -145,12 +133,12 @@ class SignIn: UIViewController {
         view.addSubview(emailbox)
         view.addSubview(password)
         view.addSubview(passwordbox)
-//        view.addSubview(google)
-//        view.addSubview(apple)
+        view.addSubview(signin)
         view.addSubview(hStack)
         view.addSubview(signInImage)
         
         signup.addTarget(self, action: #selector(go), for: .touchUpInside)
+        signin.addTarget(self, action: #selector(go1), for: .touchUpInside)
         
         
         hStack.addArrangedSubview(label2)
@@ -194,17 +182,12 @@ class SignIn: UIViewController {
             passwordbox.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             passwordbox.heightAnchor.constraint(equalToConstant: 50),
             
-//            google.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 540),
-//            google.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-//            google.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-//            google.heightAnchor.constraint(equalToConstant: 45),
-//
-//            apple.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 600),
-//            apple.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-//            apple.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-//            apple.heightAnchor.constraint(equalToConstant: 45),
+            signin.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 600),
+            signin.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 80),
+            signin.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -80),
+            signin.heightAnchor.constraint(equalToConstant: 45),
             
-            hStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 600),
+            hStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 650),
             hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             hStack.heightAnchor.constraint(equalToConstant: 55),
@@ -214,5 +197,9 @@ class SignIn: UIViewController {
     }
     @objc func go(){
             navigationController?.pushViewController(SignUp(), animated: true)
+        }
+    @objc func go1(){
+        
+            navigationController?.pushViewController(Gender(), animated: true)
         }
 }

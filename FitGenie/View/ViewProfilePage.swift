@@ -147,6 +147,19 @@ class ViewProfilePage: UIViewController {
         super.viewDidLoad()
         
         setUI()
+        
+        let data = UserDefaults.standard
+        
+        let ageStr = data.string(forKey: "Age")
+        let wStr = data.string(forKey: "weight")
+        let hStr = data.string(forKey: "height")
+        let bmiStr = data.string(forKey: "bmi")
+        
+        
+        age.text = ageStr
+        weight.text = wStr
+        height.text = hStr
+        bmi1.text = bmiStr
 
     }
     func setUI(){
@@ -192,7 +205,7 @@ class ViewProfilePage: UIViewController {
             gender.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
             
             age.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 350),
-            age.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
+            age.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 70),
             age.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
             dot1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -208,11 +221,11 @@ class ViewProfilePage: UIViewController {
             label.heightAnchor.constraint(equalToConstant: 100),
             
             height.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 410),
-            height.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60),
+            height.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 75),
             height.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
             weight.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 410),
-            weight.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 250),
+            weight.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 275),
             weight.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
             height1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 450),

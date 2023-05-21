@@ -2,6 +2,8 @@ import UIKit
 
 class FitnessGoal: UIViewController {
     
+    var fitGoal : String = ""
+    
     let fitnessgoal : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -246,6 +248,22 @@ class FitnessGoal: UIViewController {
         ])
     }
     @objc func go(){
+        
+        
+        if(fitGoal.isEmpty){
+                    let alert = UIAlertController(title: "Missing Fitness Goal", message: "Please choose your Fitness Goal", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert, animated: true, completion: nil)
+                }
+                else{
+                    
+//                    data.set(level, forKey: "Level")
+                    
+                    let vc = ActivityLevel()
+                    navigationController?.pushViewController(vc, animated: true)
+                    
+                }
             navigationController?.pushViewController(ActivityLevel(), animated: true)
         }
     @objc func select1(){
@@ -254,6 +272,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = .clear
         
+        fitGoal = "Stay Healthy"
         
     }
     
@@ -263,6 +282,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = .clear
         
+        fitGoal = "Get Fit"
         
     }
     @objc func select3(){
@@ -271,7 +291,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         loseweight.backgroundColor = .clear
         
-        
+        fitGoal = "Build Muscle"
     }
     
     @objc func select4(){
@@ -280,6 +300,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         
+        fitGoal = "Lose Weight"
         
     }
 }

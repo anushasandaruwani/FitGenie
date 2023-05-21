@@ -132,16 +132,35 @@ class HeightAndWeight: UIViewController {
         
     }
     @objc func go(){
+        
+        
         let wString = weightbox.text!
         let hString = heightbox.text!
         
         let wDouble = Double(wString)
         let hDouble = Double(hString)
         
+        guard let ageString = weightbox.text, let w = Int(ageString), w >= 0  else {
+                let alert = UIAlertController(title: "Invalid Weight", message: "Please enter a valid weight.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                return
+            }
+        guard let ageString = heightbox.text, let h = Int(ageString), h >= 0  else {
+                    let alert = UIAlertController(title: "Invalid Height", message: "Please enter a valid height.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
         
         let data = UserDefaults.standard
+        
         data.set(wDouble, forKey: "weight")
         data.set(hDouble, forKey: "height")
+        
+        
         
         
             navigationController?.pushViewController(FitnessGoal(), animated: true)

@@ -1,6 +1,28 @@
 import UIKit
 
 class ViewSchedulePage: UIViewController {
+    
+    let schedule : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 35)
+        label.textColor = .black
+        label.text = "Schedule"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let label : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 18)
+        label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
+        label.text = "Begin with exercises that match your fitness level."
+        label.numberOfLines = 3;
+        label.textAlignment = .left
+        return label
+    }()
+
 
     let desc: [String] = [
         "Monday",
@@ -41,9 +63,20 @@ class ViewSchedulePage: UIViewController {
     func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
+        view.addSubview(schedule)
+        view.addSubview(label)
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            
+            schedule.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            schedule.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            schedule.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 270),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
