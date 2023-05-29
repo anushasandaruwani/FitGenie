@@ -125,7 +125,7 @@ class Age: UIViewController {
         
         let data = UserDefaults.standard
         
-        data.set(agebox.text, forKey: "Age")
+        data.set(agebox.text, forKey: "age")
         
             navigationController?.pushViewController(HeightAndWeight(), animated: true)
         }

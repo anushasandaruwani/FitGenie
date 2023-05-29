@@ -3,7 +3,7 @@ import UIKit
 class ActivityLevel: UIViewController {
     
     var activityLvl : String = ""
-
+    
     
     let activitylevel : UILabel = {
         let label = UILabel()
@@ -249,23 +249,23 @@ class ActivityLevel: UIViewController {
             
         ])
     }
-
+    
     @objc func go(){
         if(activityLvl.isEmpty){
-                    let alert = UIAlertController(title: "Missing Activty Level", message: "Please choose your Activity Level", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(okAction)
-                    present(alert, animated: true, completion: nil)
-                }
-                else{
-                    
-//                    data.set(level, forKey: "Level")
-                    
-                    let vc = BMI()
-                    navigationController?.pushViewController(vc, animated: true)
-                    
-                }
-        navigationController?.pushViewController(BMI(), animated: true)
+            let alert = UIAlertController(title: "Missing Activty Level", message: "Please choose your Activity Level", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        else{
+            
+            let userDefs = UserDefaults.standard
+            userDefs.set(activityLvl, forKey: "current_level")
+            
+            let vc = BMI()
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
     }
     
     @objc func level1(){

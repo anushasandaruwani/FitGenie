@@ -33,7 +33,7 @@ class FitnessGoal: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let stayhealthy1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ class FitnessGoal: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let getfit1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +87,7 @@ class FitnessGoal: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let buildmuscle1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +114,7 @@ class FitnessGoal: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let loseweight1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -244,28 +244,26 @@ class FitnessGoal: UIViewController {
             nextbutton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 80),
             nextbutton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -80),
             nextbutton.heightAnchor.constraint(equalToConstant: 45),
-
+            
         ])
     }
     @objc func go(){
         
         
         if(fitGoal.isEmpty){
-                    let alert = UIAlertController(title: "Missing Fitness Goal", message: "Please choose your Fitness Goal", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(okAction)
-                    present(alert, animated: true, completion: nil)
-                }
-                else{
-                    
-//                    data.set(level, forKey: "Level")
-                    
-                    let vc = ActivityLevel()
-                    navigationController?.pushViewController(vc, animated: true)
-                    
-                }
-            navigationController?.pushViewController(ActivityLevel(), animated: true)
+            let alert = UIAlertController(title: "Missing Fitness Goal", message: "Please choose your Fitness Goal", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
         }
+        else{
+            let userDefs = UserDefaults.standard
+            userDefs.set(fitGoal, forKey: "goal")
+            
+            let vc = ActivityLevel()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     @objc func select1(){
         stayhealthy.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         getfit.backgroundColor = .clear
@@ -304,5 +302,5 @@ class FitnessGoal: UIViewController {
         
     }
 }
-    
+
 

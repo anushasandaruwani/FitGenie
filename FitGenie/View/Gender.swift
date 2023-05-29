@@ -2,9 +2,9 @@
 import UIKit
 
 class Gender: UIViewController {
-
     
-
+    
+    
     let gender : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class Gender: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     let female: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Female", for: .normal)
@@ -59,7 +59,7 @@ class Gender: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     
     
     override func viewDidLoad() {
@@ -79,10 +79,10 @@ class Gender: UIViewController {
         view.addSubview(male)
         view.addSubview(female)
         
-        male.addTarget(self, action: #selector(go), for: .touchUpInside)
-        malebutton.addTarget(self, action: #selector(go), for: .touchUpInside)
-        female.addTarget(self, action: #selector(go), for: .touchUpInside)
-        femalebutton.addTarget(self, action: #selector(go), for: .touchUpInside)
+        male.addTarget(self, action: #selector(goMale), for: .touchUpInside)
+        malebutton.addTarget(self, action: #selector(goMale), for: .touchUpInside)
+        female.addTarget(self, action: #selector(goFemale), for: .touchUpInside)
+        femalebutton.addTarget(self, action: #selector(goFemale), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
@@ -113,13 +113,20 @@ class Gender: UIViewController {
             female.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 210),
             female.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             female.heightAnchor.constraint(equalToConstant: 60),
-
+            
         ])
         
     }
-    @objc func go(){
-            navigationController?.pushViewController(Age(), animated: true)
-        }
-  
-
+    @objc func goMale(){
+        let userDefs = UserDefaults.standard
+        userDefs.set("male", forKey: "gender")
+        navigationController?.pushViewController(Age(), animated: true)
+    }
+    @objc func goFemale(){
+        let userDefs = UserDefaults.standard
+        userDefs.set("female", forKey: "gender")
+        navigationController?.pushViewController(Age(), animated: true)
+    }
+    
+    
 }

@@ -1,7 +1,10 @@
 import UIKit
+import FirebaseFirestore
 
 class SignUp: UIViewController {
-
+    
+    let database = Firestore.firestore()
+    
     let welcome : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +31,7 @@ class SignUp: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let email : UILabel = {
         let label = UILabel()
@@ -39,7 +42,7 @@ class SignUp: UIViewController {
         label.textAlignment = .left
         return label
     }()
-
+    
     let emailbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +52,7 @@ class SignUp: UIViewController {
         textField.font = .systemFont(ofSize: 15)
         textField.textAlignment = .left
         return textField
-        }()
+    }()
     
     let password : UILabel = {
         let label = UILabel()
@@ -60,7 +63,7 @@ class SignUp: UIViewController {
         label.textAlignment = .left
         return label
     }()
-
+    
     let passwordbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +73,7 @@ class SignUp: UIViewController {
         textField.font = .systemFont(ofSize: 15)
         textField.textAlignment = .left
         return textField
-        }()
+    }()
     
     let signup : UIButton = {
         let button = UIButton(type: .system)
@@ -92,7 +95,7 @@ class SignUp: UIViewController {
         label.textAlignment = .center
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         return label
-        }()
+    }()
     
     let signin : UIButton = {
         let button = UIButton(type: .system)
@@ -103,20 +106,22 @@ class SignUp: UIViewController {
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     
     let hStack : UIStackView = {
-            let stack = UIStackView()
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            stack.axis = .horizontal
-            stack.spacing = 20
-            return stack
-        }()
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 20
+        return stack
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("hi")
+        
         setUI()
         
         
@@ -140,9 +145,9 @@ class SignUp: UIViewController {
         
         hStack.addArrangedSubview(label2)
         hStack.addArrangedSubview(signin)
-                
-                
-                
+        
+        
+        
         
         NSLayoutConstraint.activate([
             
@@ -188,17 +193,67 @@ class SignUp: UIViewController {
             hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             hStack.heightAnchor.constraint(equalToConstant: 55),
-        
+            
         ])
         
     }
     
     @objc func go(){
-            navigationController?.pushViewController(SignIn(), animated: true)
-        }
+        navigationController?.pushViewController(SignIn(), animated: true)
+    }
     
     @objc func go1(){
-            navigationController?.pushViewController(Gender(), animated: true)
+        
+        if emailbox.text != "" && passwordbox.text != "" {
+            signUpProcess()
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Fill the required fields", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okayAction)
+            self.present(alert, animated: true, completion: nil)
         }
 
+    }
+    
+    func signUpProcess(){
+        
+        let email = emailbox.text
+        let password = passwordbox.text
+        let userdefs = UserDefaults.standard
+        
+        database.collection("user_data").whereField("email", isEqualTo: email as Any).getDocuments { snapshot, err in
+            if let err = err{
+                print(err)
+                return
+            }
+            
+            guard let doc = snapshot?.documents else {
+                print("Nothing's here")
+                return
+            }
+            
+            if doc.first != nil{
+                print("available")
+                let alert = UIAlertController(title: "Error", message: "Registration Unsuccessful", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okayAction)
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                print("not available")
+                userdefs.set(email, forKey: "email")
+                userdefs.set(password, forKey: "password")
+                let alert = UIAlertController(title: "Success", message: "Successfully Registered", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
+                    self.emailbox.text = ""
+                    self.passwordbox.text = ""
+                    self.navigationController?.pushViewController(Gender(), animated: true)
+                }
+                alert.addAction(okayAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    
 }

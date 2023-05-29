@@ -1,6 +1,9 @@
 import UIKit
+import FirebaseFirestore
 
 class ViewProfilePage: UIViewController {
+    
+    let database = Firestore.firestore()
     
     let name : UILabel = {
         let label = UILabel()
@@ -27,7 +30,7 @@ class ViewProfilePage: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let gender : UILabel = {
         let label = UILabel()
@@ -54,7 +57,7 @@ class ViewProfilePage: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let height : UILabel = {
         let label = UILabel()
@@ -65,7 +68,7 @@ class ViewProfilePage: UIViewController {
         label.textAlignment = .left
         label.textColor = .black
         return label
-        }()
+    }()
     let height1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +76,7 @@ class ViewProfilePage: UIViewController {
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         label.text = "Height(cm)"
         return label
-        }()
+    }()
     
     let weight : UILabel = {
         let label = UILabel()
@@ -83,7 +86,7 @@ class ViewProfilePage: UIViewController {
         label.text = "45.5kg"
         label.textColor = .black
         return label
-        }()
+    }()
     let weight1 : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -91,14 +94,14 @@ class ViewProfilePage: UIViewController {
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         label.text = "Weight(kg)"
         return label
-        }()
+    }()
     
     let dot : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Dot"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let label : UILabel = {
         let label = UILabel()
@@ -119,7 +122,7 @@ class ViewProfilePage: UIViewController {
         label.text = "BMI"
         label.textAlignment = .center
         return label
-        }()
+    }()
     
     let bmi1 : UILabel = {
         let label = UILabel()
@@ -129,7 +132,7 @@ class ViewProfilePage: UIViewController {
         label.text = "16.0"
         label.textAlignment = .center
         return label
-        }()
+    }()
     
     let logout : UIButton = {
         let button = UIButton(type: .system)
@@ -141,13 +144,13 @@ class ViewProfilePage: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
-        
+        loadUserData()
         let data = UserDefaults.standard
         
         let ageStr = data.string(forKey: "Age")
@@ -160,7 +163,7 @@ class ViewProfilePage: UIViewController {
         weight.text = wStr
         height.text = hStr
         bmi1.text = bmiStr
-
+        
     }
     func setUI(){
         view.backgroundColor = .systemBackground
@@ -260,6 +263,47 @@ class ViewProfilePage: UIViewController {
     }
     
     @objc func go(){
-            navigationController?.pushViewController(FirstScreen(), animated: true)
-        }
+        let vc = FirstScreen()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func loadUserData(){
+        let userDefs = UserDefaults.standard
+        let email = userDefs.string(forKey: "email")
+        
+        database.collection("user_data")
+            .whereField("email", isEqualTo: email as Any)
+            .getDocuments { snapshot, err in
+                if let err = err{
+                    print(err)
+                    return
+                }
+                
+                guard let doc = snapshot?.documents else {
+                    print("Nothing's here")
+                    return
+                }
+                
+                if let userdoc = doc.first{
+                    print("available")
+                    let email = userdoc.data()["email"] as? String ?? ""
+                    let age = userdoc.data()["age"] as? String ?? ""
+                    let weight = userdoc.data()["weight"] as? Double ?? 0
+                    let height = userdoc.data()["height"] as? Double ?? 0
+                    let bmi = userdoc.data()["bmi_level"] as? String ?? ""
+                    let gender = userdoc.data()["gender"] as? String ?? ""
+                    let level = userdoc.data()["current_level"] as? String ?? ""
+                    
+                    self.name.text = email
+                    self.age.text = age
+                    self.weight.text = String(weight)
+                    self.height.text = String(height)
+                    self.gender.text = gender
+                    self.bmi1.text = bmi
+                    self.level.text = level
+                    
+                }
+            }
+    }
 }

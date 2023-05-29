@@ -1,6 +1,9 @@
 import UIKit
+import FirebaseFirestore
 
 class SignIn: UIViewController {
+    
+    let database = Firestore.firestore()
     
     let welcome : UILabel = {
         let label = UILabel()
@@ -31,7 +34,7 @@ class SignIn: UIViewController {
         label.textAlignment = .left
         return label
     }()
-
+    
     let emailbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +44,7 @@ class SignIn: UIViewController {
         textField.font = .systemFont(ofSize: 15)
         textField.textAlignment = .left
         return textField
-        }()
+    }()
     
     let password : UILabel = {
         let label = UILabel()
@@ -52,7 +55,7 @@ class SignIn: UIViewController {
         label.textAlignment = .left
         return label
     }()
-
+    
     let passwordbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -62,14 +65,14 @@ class SignIn: UIViewController {
         textField.font = .systemFont(ofSize: 15)
         textField.textAlignment = .left
         return textField
-        }()
+    }()
     
     let signInImage : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "SignIn"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let signin : UIButton = {
         let button = UIButton(type: .system)
@@ -92,7 +95,7 @@ class SignIn: UIViewController {
         label.textAlignment = .center
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
         return label
-        }()
+    }()
     
     let signup : UIButton = {
         let button = UIButton(type: .system)
@@ -103,20 +106,20 @@ class SignIn: UIViewController {
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-        }()
+    }()
     
     let hStack : UIStackView = {
-            let stack = UIStackView()
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            stack.axis = .horizontal
-            stack.spacing = 20
-            return stack
-        }()
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 20
+        return stack
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUI()
         
         
@@ -141,9 +144,9 @@ class SignIn: UIViewController {
         
         hStack.addArrangedSubview(label2)
         hStack.addArrangedSubview(signup)
-                
-                
-                
+        
+        
+        
         
         NSLayoutConstraint.activate([
             
@@ -189,15 +192,91 @@ class SignIn: UIViewController {
             hStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             hStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             hStack.heightAnchor.constraint(equalToConstant: 55),
-        
+            
         ])
         
     }
     @objc func go(){
-            navigationController?.pushViewController(SignUp(), animated: true)
-        }
+        navigationController?.pushViewController(SignUp(), animated: true)
+    }
     @objc func go1(){
+        signInProcess()
+    }
+    
+    func signInProcess(){
         
-            navigationController?.pushViewController(Gender(), animated: true)
+        let email = emailbox.text
+        let password = passwordbox.text
+        let userdefs = UserDefaults.standard
+        
+        database.collection("user_data")
+            .whereField("email", isEqualTo: email as Any)
+            .whereField("password", isEqualTo: password as Any)
+            .getDocuments { snapshot, err in
+            if let err = err{
+                print(err)
+                return
+            }
+            
+            guard let doc = snapshot?.documents else {
+                print("Nothing's here")
+                return
+            }
+            
+            if doc.first != nil{
+                print("available")
+                userdefs.set(email, forKey: "email")
+                userdefs.set(password, forKey: "password")
+                let alert = UIAlertController(title: "Success", message: "Successfully Logged In", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
+                    self.emailbox.text = ""
+                    self.passwordbox.text = ""
+                    self.tabBarActivate()
+                }
+                alert.addAction(okayAction)
+                self.present(alert, animated: true, completion: nil)
+                
+            }else{
+                print("not available")
+                let alert = UIAlertController(title: "Error", message: "Loggin In Unsuccessful", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okayAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
+    }
+    
+    func tabBarActivate(){
+        let tabBarController = UITabBarController()
+    
+        let home = UINavigationController(rootViewController: ViewHomePage())
+        let schedule = UINavigationController(rootViewController: ViewSchedulePage())
+        let progress = UINavigationController(rootViewController: ViewProgressPage())
+        let profile = UINavigationController(rootViewController: ViewProfilePage())
+        
+        home.title = "Home"
+        schedule.title = "Schedule"
+        progress.title = "Progress"
+        profile.title = "Profile"
+        
+        tabBarController.setViewControllers([home,schedule,progress,profile], animated: false)
+        
+        guard let items = tabBarController.tabBar.items else {
+            return
+        }
+        
+        let images = ["house","calendar","chart.xyaxis.line","person.crop.circle"]
+        
+        for x in 0..<items.count {
+            items[x].image = UIImage(systemName: images[x])
+            items[x].badgeColor = UIColor.orange
+        }
+        
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.backgroundColor = .white
+        tabBarAppearance.tintColor = .orange
+        
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true)
+    }
 }

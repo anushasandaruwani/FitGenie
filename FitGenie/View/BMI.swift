@@ -1,6 +1,9 @@
 import UIKit
+import FirebaseFirestore
 
 class BMI: UIViewController {
+    
+    let database = Firestore.firestore()
     
     let bmi : UILabel = {
         let label = UILabel()
@@ -28,7 +31,7 @@ class BMI: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let yourBMI : UILabel = {
         let label = UILabel()
@@ -48,7 +51,7 @@ class BMI: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        }()
+    }()
     
     let bmirange : UILabel = {
         let label = UILabel()
@@ -71,13 +74,13 @@ class BMI: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
         calBMI()
- 
+        
     }
     
     func calBMI(){
@@ -96,17 +99,25 @@ class BMI: UIViewController {
         
         yourBMI.text = String(bmiStr)
         
+        let number: Double = bmi
+        let formattedNumber = String(format: "%.2f", number)
+        data.set(formattedNumber, forKey: "bmiLevel")
+
+        
         if(bmi<18.5){
             print("underweight")
+            
         }
         else if(bmi<24.9){
             print("normal")
+            
         }
         else  if(bmi<34.9){
             print("overweight")
+            
         }
         else{
-            print("weight:",w,":","heught:",h,"bmi",bmi)
+            print("weight:",w,":","height:",h,"bmi",bmi)
         }
     }
     
@@ -161,16 +172,14 @@ class BMI: UIViewController {
             nextbutton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 80),
             nextbutton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -80),
             nextbutton.heightAnchor.constraint(equalToConstant: 45),
-
+            
         ])
     }
     @objc func go(){
-        
+        saveUser()
         
         let tabBarController = UITabBarController()
-        
-        
-        
+    
         let home = UINavigationController(rootViewController: ViewHomePage())
         let schedule = UINavigationController(rootViewController: ViewSchedulePage())
         let progress = UINavigationController(rootViewController: ViewProgressPage())
@@ -188,7 +197,7 @@ class BMI: UIViewController {
         }
         
         let images = ["house","calendar","chart.xyaxis.line","person.crop.circle"]
-    
+        
         for x in 0..<items.count {
             items[x].image = UIImage(systemName: images[x])
             items[x].badgeColor = UIColor.orange
@@ -200,7 +209,42 @@ class BMI: UIViewController {
         
         tabBarController.modalPresentationStyle = .fullScreen
         present(tabBarController, animated: true)
-            }
+    }
     
+    func saveUser(){
+        let userDefs = UserDefaults.standard
+        
+        let email = userDefs.string(forKey: "email")
+        let password = userDefs.string(forKey: "password")
+        let gender = userDefs.string(forKey: "gender")
+        let age = userDefs.string(forKey: "age")
+        let weight = userDefs.double(forKey: "weight")
+        let height = userDefs.double(forKey: "height")
+        let goal = userDefs.string(forKey: "goal")
+        let current_level = userDefs.string(forKey: "current_level")
+        let bmi_level = userDefs.string(forKey: "bmiLevel")
+        
+        let data: [String:Any] = [
+            "email":email,
+            "password":password,
+            "gender":gender,
+            "age":age,
+            "weight":weight,
+            "height":height,
+            "goal":goal,
+            "current_level":current_level,
+            "bmi_level":bmi_level
+        ]
+        
+        database.collection("user_data").addDocument(data: data){ error in
+            if let error = error{
+                print("Failed",error)
+            }
+            else{
+                print("Success")
+            }
+        }
+
+    }
 }
 
