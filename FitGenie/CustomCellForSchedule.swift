@@ -18,7 +18,7 @@ class CustomCellForSchedule: UITableViewCell {
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 26, weight: .thin)
+        label.font = .systemFont(ofSize: 22, weight: .thin)
         label.text = "Error"
         return label
     }()
@@ -76,6 +76,7 @@ class CustomCellForSchedule: UITableViewCell {
             myLabelMini.topAnchor.constraint(equalTo: myLabel.topAnchor),
             myLabelMini.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
             myLabelMini.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: 20),
+            myLabelMini.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
 
     }

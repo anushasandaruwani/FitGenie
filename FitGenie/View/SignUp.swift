@@ -46,6 +46,8 @@ class SignUp: UIViewController {
     let emailbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
@@ -67,6 +69,7 @@ class SignUp: UIViewController {
     let passwordbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isSecureTextEntry = true
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
@@ -212,7 +215,7 @@ class SignUp: UIViewController {
             alert.addAction(okayAction)
             self.present(alert, animated: true, completion: nil)
         }
-
+        
     }
     
     func signUpProcess(){
@@ -242,14 +245,15 @@ class SignUp: UIViewController {
                 print("not available")
                 userdefs.set(email, forKey: "email")
                 userdefs.set(password, forKey: "password")
-                let alert = UIAlertController(title: "Success", message: "Successfully Registered", preferredStyle: .alert)
-                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
-                    self.emailbox.text = ""
-                    self.passwordbox.text = ""
-                    self.navigationController?.pushViewController(Gender(), animated: true)
-                }
-                alert.addAction(okayAction)
-                self.present(alert, animated: true, completion: nil)
+                //                let alert = UIAlertController(title: "Success", message: "Successfully Registered", preferredStyle: .alert)
+                //                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
+                //
+                //                }
+                self.emailbox.text = ""
+                self.passwordbox.text = ""
+                self.navigationController?.pushViewController(Gender(), animated: true)
+//                alert.addAction(okayAction)
+//                self.present(alert, animated: true, completion: nil)
             }
         }
     }

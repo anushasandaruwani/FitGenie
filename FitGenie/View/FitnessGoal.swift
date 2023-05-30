@@ -270,7 +270,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = .clear
         
-        fitGoal = "Stay Healthy"
+        fitGoal = "stay-healthy"
         
     }
     
@@ -280,7 +280,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = .clear
         
-        fitGoal = "Get Fit"
+        fitGoal = "get-fit"
         
     }
     @objc func select3(){
@@ -289,7 +289,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         loseweight.backgroundColor = .clear
         
-        fitGoal = "Build Muscle"
+        fitGoal = "build-muscle"
     }
     
     @objc func select4(){
@@ -298,7 +298,7 @@ class FitnessGoal: UIViewController {
         buildmuscle.backgroundColor = .clear
         loseweight.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 235/255, alpha: 1.0)
         
-        fitGoal = "Lose Weight"
+        fitGoal = "lose-weight"
         
     }
 }

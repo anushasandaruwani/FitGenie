@@ -16,8 +16,9 @@ class CustomCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 24, weight: .medium)
+        label.font = .systemFont(ofSize: 22, weight: .medium)
         label.text = "Error"
+        label.numberOfLines = 0
         return label
     }()
     

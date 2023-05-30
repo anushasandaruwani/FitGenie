@@ -1,28 +1,37 @@
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class ViewProgressPage: UIViewController {
+    
+    // MARK: Variables
+    let db = Firestore.firestore()
+    
+    var dataArray: [[String: Any]] = []
+    var weights: [String] = []
+    var doubleWeights: [Double] = []
     
     
     private var chartView: ChartView!
     
-    let progress: UILabel = {
+    // MARK: Components
+    
+    let labelTitleOne: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 35)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 35, weight: .thin)
         label.text = "Progress"
         label.textAlignment = .center
         return label
     }()
     
-    let label: UILabel = {
+    let labelTitleTwo: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18)
-        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 18, weight: .thin)
+        label.numberOfLines = 0
         label.textColor = UIColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0)
-        label.text = "Your body weight has undergone fluctuations in the past six months."
+        label.text = "Your weight changes over the past months"
         label.textAlignment = .center
         return label
     }()
@@ -34,63 +43,115 @@ class ViewProgressPage: UIViewController {
         return imageView
     }()
     
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let data = UserDefaults.standard
+        let email = data.string(forKey: "email")!
+        
+        readUserWeightsFromFirebase(email: email)
         
         setupUI()
-        setupChartView()
     }
     
     func setupUI() {
         view.backgroundColor = .white
         
-        view.addSubview(progress)
-        view.addSubview(label)
+        view.addSubview(labelTitleOne)
+        view.addSubview(labelTitleTwo)
         view.addSubview(image)
         
-        progress.snp.makeConstraints { make in
+        labelTitleOne.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-30)
             make.centerX.equalToSuperview()
         }
         
-        label.snp.makeConstraints { make in
-            make.top.equalTo(progress.snp.bottom).offset(30)
+        labelTitleTwo.snp.makeConstraints { make in
+            make.top.equalTo(labelTitleOne.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.left.equalTo(view.snp.left).offset(20)
             make.right.equalTo(view.snp.right).offset(-20)
         }
         
         image.snp.makeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-150)
+            make.bottom.equalTo(view.snp.bottom).offset(-80)
             make.centerX.equalTo(view)
             make.size.equalTo(CGSize(width: 300, height: 300))
         }
     }
     
-    // MARK:- Functions
+    // MARK: Functions
     
+    //Bar chart class is called here with the weight data
     func setupChartView() {
-        chartView = ChartView(frame: CGRect(x: 10, y: 280, width: 380, height: 180))
+        chartView = ChartView(frame: CGRect(x: 10, y: 350, width: 400, height: 200))
         chartView.backgroundColor = .white
-        let data: [CGFloat] = [80, 40, 20, 77, 65, 45]
+        let data: [Double] = doubleWeights
+        let monthLabels: [String] = []
         
-        chartView.updateChart(with: data)
+        chartView.updateChart(with: data, monthLabels: monthLabels)
         view.addSubview(chartView)
         
         chartView.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom).offset(20)
+            make.top.equalTo(labelTitleTwo.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(400)
             make.height.equalTo(200)
         }
-
     }
+    
+    //Getting the weight changes of users
+    func readUserWeightsFromFirebase(email: String) {
+        db.collection("/user_weights")
+            .whereField("email", isEqualTo: email) // Filter documents by email address
+            .getDocuments { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        self.dataArray.append(data)
+                    }
+                }
+                self.saveweight()
+                self.convertStringWeightsToDouble()
+                self.printArrayData()
+                self.setupChartView()
+            }
+    }
+    
+    func saveweight(){
+        for data in dataArray {
+            self.weights.append(data["weight"] as! String)
+        }
+    }
+    func printArrayData() {
+        
+        print("weight data array:")
+        for data in doubleWeights {
+            
+            print(data)
+        }
+    }
+    
+    func convertStringWeightsToDouble() {
+       
+        for weightString in weights {
+            if let weightDouble = Double(weightString) {
+                doubleWeights.append(weightDouble)
+            }
+        }
+    
+    }
+
 }
 
+//MARK: Bar Chart Class
 class ChartView: UIView {
     
-    private var dataEntries: [CGFloat] = []
+    private var dataEntries: [Double] = []
+    private var monthLabels: [String] = [] // Array to store month labels
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -118,35 +179,37 @@ class ChartView: UIView {
         let barSpacing: CGFloat = 20
         var xPosition: CGFloat = 55
         
-        for (_, value) in dataEntries.enumerated() {
+        for (index, value) in dataEntries.enumerated() {
             let columnHeight = columnYPoint(value)
             let barRect = CGRect(x: xPosition, y: columnHeight, width: barWidth, height: chartHeight - columnHeight)
             
-            context.setFillColor(CGColor(red: 232/255, green: 207/255, blue: 190/255, alpha: 1.0))
+            context.setFillColor(CGColor(red: 143/255, green: 143/255, blue: 137/255, alpha: 1.0))
             context.fill(barRect)
             context.fillPath()
             
+            // Display value labels
+            let valueLabel = UILabel(frame: CGRect(x: xPosition - barWidth/2, y: columnHeight - 40, width: barWidth, height: 20))
+            valueLabel.font = UIFont.systemFont(ofSize: 12)
+            valueLabel.textColor = .black
+            valueLabel.textAlignment = .center
+            valueLabel.text = "\(Int(value))kg"
+            addSubview(valueLabel)
+            
+            // Display month labels
+//            let monthLabel = UILabel(frame: CGRect(x: xPosition - barWidth/2, y: rect.height - 20, width: barWidth, height: 20))
+//            monthLabel.font = UIFont.systemFont(ofSize: 12)
+//            monthLabel.textColor = .black
+//            monthLabel.textAlignment = .center
+//            monthLabel.text = monthLabels[index]
+            //addSubview(monthLabel)
+            
             xPosition += barSpacing + barWidth
         }
-        
-        context.setStrokeColor(UIColor.blue.cgColor)
-        context.setLineWidth(2.0)
-        
-        let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(dataEntries[0])))
-        
-        for i in 1..<dataEntries.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(dataEntries[i]))
-            linePath.addLine(to: nextPoint)
-        }
-        
-        context.addPath(linePath.cgPath)
-        context.strokePath()
     }
     
-    func updateChart(with data: [CGFloat]) {
+    func updateChart(with data: [Double], monthLabels: [String]) {
         dataEntries = data
+        self.monthLabels = monthLabels
         setNeedsDisplay()
     }
 }
-

@@ -102,7 +102,7 @@ class BMI: UIViewController {
         let number: Double = bmi
         let formattedNumber = String(format: "%.2f", number)
         data.set(formattedNumber, forKey: "bmiLevel")
-
+        
         
         if(bmi<18.5){
             print("underweight")
@@ -179,7 +179,7 @@ class BMI: UIViewController {
         saveUser()
         
         let tabBarController = UITabBarController()
-    
+        
         let home = UINavigationController(rootViewController: ViewHomePage())
         let schedule = UINavigationController(rootViewController: ViewSchedulePage())
         let progress = UINavigationController(rootViewController: ViewProgressPage())
@@ -225,15 +225,15 @@ class BMI: UIViewController {
         let bmi_level = userDefs.string(forKey: "bmiLevel")
         
         let data: [String:Any] = [
-            "email":email,
-            "password":password,
-            "gender":gender,
-            "age":age,
+            "email":email as Any,
+            "password":password as Any,
+            "gender":gender as Any,
+            "age":age as Any,
             "weight":weight,
             "height":height,
-            "goal":goal,
-            "current_level":current_level,
-            "bmi_level":bmi_level
+            "goal":goal as Any,
+            "current_level":current_level as Any,
+            "bmi_level":bmi_level as Any
         ]
         
         database.collection("user_data").addDocument(data: data){ error in
@@ -244,7 +244,20 @@ class BMI: UIViewController {
                 print("Success")
             }
         }
-
+        
+        let dataUserWeights: [String: Any] = [
+            "email": email as Any,
+            "weight": String(weight)
+        ]
+        
+        database.collection("/user_weights").addDocument(data: dataUserWeights) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
+        }
+        
     }
 }
 

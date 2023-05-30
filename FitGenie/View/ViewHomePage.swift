@@ -5,7 +5,7 @@ class ViewHomePage: UIViewController {
     
     //Variables
     
-    let db = Firestore.firestore() //Firebase Decl
+    let database = Firestore.firestore() //Firebase Decl
     
     var workoutArray: [[String: Any]] = []
     var nameArray: [String] = []
@@ -14,6 +14,7 @@ class ViewHomePage: UIViewController {
     var videoArray: [String] = []
     
     var dayOfWeek: String = "Monday"
+    var goal: String = "stay-healthy"
     
     //Components
     
@@ -69,11 +70,12 @@ class ViewHomePage: UIViewController {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en_US")
         
         let currentDate = Date()
         dayOfWeek = dateFormatter.string(from: currentDate)
         
-        self.chooseTheExerciseList()
+        self.getGoal()
         
         self.setUI()
         
@@ -120,22 +122,82 @@ class ViewHomePage: UIViewController {
         
     }
     
-    func chooseTheExerciseList(){
+    func getGoal(){
+        let userdefs = UserDefaults.standard
+        let email = userdefs.value(forKey: "email")
         
-        if(self.dayOfWeek == "Monday"){readDocument(pathStr: "/exercises/get-fit/day-one")}
-        else if(self.dayOfWeek == "Tuesday"){readDocument(pathStr: "/exercises/get-fit/day-two")}
-        else if(self.dayOfWeek == "Wednesday"){ readDocument(pathStr: "/exercises/get-fit/day-three")}
-        else if(self.dayOfWeek == "Thursday"){readDocument(pathStr: "/exercises/get-fit/day-four")}
-        else if(self.dayOfWeek == "Friday"){readDocument(pathStr: "/exercises/get-fit/day-five")}
-        else if(self.dayOfWeek == "Saturday"){readDocument(pathStr: "/exercises/get-fit/day-six")}
-        else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/exercises/get-fit/day-seven")}
+        print("email address:",email as Any)
         
-        else{readDocument(pathStr: "/exercises/get-fit/day-one")}
-    }
+        database.collection("user_data")
+            .whereField("email", isEqualTo: email as Any)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error fetching user data:", error)
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    print("No documents found")
+                    return
+                }
+                
+                if let docData = documents.first?.data() {
+                    let goalData = docData["goal"] as? String ?? "stay-healthy"
+                    self.goal = goalData
+                    print("Goal:",self.goal)
+                    self.getExercise()
+                }
+            }        }
+    
+    func getExercise(){
+        
+        let path = "/exercises/"
+        print("Hi",self.dayOfWeek)
+        if(self.dayOfWeek == "Monday"){
+            let day = "/day-one"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Tuesday"){
+            let day = "/day-two"
+            let completePath = path + self.goal + day
+            print("Path String :", completePath)
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Wednesday"){
+            let day = "/day-three"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Thursday"){
+            let day = "/day-four"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Friday"){
+            let day = "/day-five"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Saturday"){
+            let day = "/day-six"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else if(self.dayOfWeek == "Sunday"){
+            let day = "/day-seven"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }
+        else{
+            let day = "/day-one"
+            let completePath = path + self.goal + day
+            readDocument(pathStr: completePath)
+        }    }
     
     func readDocument(pathStr:String){
         
-        db.collection(pathStr).getDocuments() { (querySnapshot, err) in
+        database.collection(pathStr).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -179,7 +241,7 @@ class ViewHomePage: UIViewController {
             self.videoArray.append(data["video"] as! String)
         }
     }
-
+    
     func printArrayData() {
         print("Name data array:")
         for data in workoutArray {
@@ -187,48 +249,48 @@ class ViewHomePage: UIViewController {
         }
     }
 }
-    extension ViewHomePage : UITableViewDelegate, UITableViewDataSource {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.nameArray.count
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier:  CustomCell.identifier, for: indexPath) as? CustomCell else {
-                fatalError("The TableView could not dequeue a CustomCell in ViewHomePage.")
-            }
-            
-            let image = self.pictureArray[indexPath.row]
-            let pic = UIImage(named: image)
-            let label = self.nameArray[indexPath.row]
-            cell.configure(with: pic!, and: label)
-            cell.contentView.backgroundColor = .white
-            return cell
-        }
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 112.5
-        }
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-            print("DEBUG PRINT:", indexPath.row)
-            
-            let nameD = nameArray[indexPath.row]
-            let descD = descriptionArray[indexPath.row]
-            let videoD = videoArray[indexPath.row]
-            
-            print(nameD,":",descD,":",videoD)
-            
-            getNext(name: nameD, desc: descD, video: videoD)
-        }
-        
-        @objc func getNext(name:String,desc:String,video:String) {
-            let vc = PlayVideo()
-            vc.labelWorkout.text = name
-            vc.labelDesc.text = desc
-            vc.videoId = video
-            
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        
+extension ViewHomePage : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.nameArray.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:  CustomCell.identifier, for: indexPath) as? CustomCell else {
+            fatalError("The TableView could not dequeue a CustomCell in ViewHomePage.")
+        }
+        
+        let image = self.pictureArray[indexPath.row]
+        let pic = UIImage(named: image)
+        let label = self.nameArray[indexPath.row]
+        cell.configure(with: pic!, and: label)
+        cell.contentView.backgroundColor = .white
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 112.5
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print("DEBUG PRINT:", indexPath.row)
+        
+        let nameD = nameArray[indexPath.row]
+        let descD = descriptionArray[indexPath.row]
+        let videoD = videoArray[indexPath.row]
+        
+        print(nameD,":",descD,":",videoD)
+        
+        getNext(name: nameD, desc: descD, video: videoD)
+    }
+    
+    @objc func getNext(name:String,desc:String,video:String) {
+        let vc = PlayVideo()
+        vc.labelWorkout.text = name
+        vc.labelDesc.text = desc
+        vc.videoId = video
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
 

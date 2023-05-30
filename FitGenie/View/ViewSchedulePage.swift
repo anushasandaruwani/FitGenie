@@ -1,6 +1,11 @@
 import UIKit
+import FirebaseFirestore
 
 class ViewSchedulePage: UIViewController {
+    
+    let database = Firestore.firestore()
+    
+    var goal: String = "stay-fit"
     
     let schedule : UILabel = {
         let label = UILabel()
@@ -22,8 +27,8 @@ class ViewSchedulePage: UIViewController {
         label.textAlignment = .left
         return label
     }()
-
-
+    
+    
     let desc: [String] = [
         "Monday",
         "Tuesday",
@@ -33,7 +38,7 @@ class ViewSchedulePage: UIViewController {
         "Saturday",
         "Sunday"
     ]
-
+    
     let exerciseImages: [UIImage] = [
         UIImage(named: "Abs")!,
         UIImage(named: "FullBody")!,
@@ -43,7 +48,7 @@ class ViewSchedulePage: UIViewController {
         UIImage(named: "Abs")!,
         UIImage(named: "Arm")!
     ]
-
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
@@ -52,20 +57,21 @@ class ViewSchedulePage: UIViewController {
         tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getGoal()
         setupUI()
         tableView.delegate = self
         tableView.dataSource = self
     }
-
+    
     func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
         view.addSubview(schedule)
         view.addSubview(label)
-
+        
         NSLayoutConstraint.activate([
             
             schedule.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -82,6 +88,34 @@ class ViewSchedulePage: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    func getGoal(){
+           let userdefs = UserDefaults.standard
+           let email = userdefs.value(forKey: "email")
+           
+        print("email address:",email as Any)
+           
+           database.collection("user_data")
+               .whereField("email", isEqualTo: email as Any)
+               .getDocuments { snapshot, error in
+                   if let error = error {
+                       print("Error fetching user data:", error)
+                       return
+                   }
+                   
+                   guard let documents = snapshot?.documents else {
+                       print("No documents found")
+                       return
+                   }
+                   
+                   if let docData = documents.first?.data() {
+                       let goalData = docData["goal"] as? String ?? "stay-healthy"
+                       self.goal = goalData
+                       print("Goal:",self.goal)
+                   }
+               }
+    }
+    
 }
 
 extension ViewSchedulePage: UITableViewDelegate, UITableViewDataSource {
@@ -108,26 +142,33 @@ extension ViewSchedulePage: UITableViewDelegate, UITableViewDataSource {
         
         if(selectedRow == 0){
             //monday
-            getNextVC(pathStr: "/exercises/get-fit/day-one",day: "Monday")
+            let pathString = "/exercises/" + self.goal + "/day-one"
+            getNextVC(pathStr: pathString,day: "Monday")
         }else if(selectedRow == 1){
             //tuesday
-            getNextVC(pathStr: "/exercises/get-fit/day-two",day: "Tuesday")
+            let pathString = "/exercises/" + self.goal + "/day-two"
+            getNextVC(pathStr: pathString,day: "Tuesday")
         }else if(selectedRow == 2){
             //wednesday
-            getNextVC(pathStr: "/exercises/get-fit/day-three",day: "Wednesday")
+            let pathString = "/exercises/" + self.goal + "/day-three"
+            getNextVC(pathStr: pathString,day: "Wednesday")
         }else if(selectedRow == 3){
             //thursday
-            getNextVC(pathStr: "/exercises/get-fit/day-four",day: "Thursday")
+            let pathString = "/exercises/" + self.goal + "/day-four"
+            getNextVC(pathStr: pathString,day: "Thursday")
         }else if(selectedRow == 4){
             //friday
-            getNextVC(pathStr: "/exercises/get-fit/day-five",day: "Friday")
+            let pathString = "/exercises/" + self.goal + "/day-five"
+            getNextVC(pathStr: pathString,day: "Friday")
             
         }else if(selectedRow == 5){
             //saturday
-            getNextVC(pathStr: "/exercises/get-fit/day-six",day: "Saturday")
+            let pathString = "/exercises/" + self.goal + "/day-six"
+            getNextVC(pathStr: pathString,day: "Saturday")
         }else if(selectedRow == 6){
             //sunday
-            getNextVC(pathStr: "/exercises/get-fit/day-seven",day: "Sunday")
+            let pathString = "/exercises/" + self.goal + "/day-seven"
+            getNextVC(pathStr: pathString,day: "Sunday")
         }
     }
     

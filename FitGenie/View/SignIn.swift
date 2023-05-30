@@ -38,6 +38,8 @@ class SignIn: UIViewController {
     let emailbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
@@ -59,6 +61,7 @@ class SignIn: UIViewController {
     let passwordbox : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isSecureTextEntry = true
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 8
         textField.textColor = .black
@@ -213,42 +216,42 @@ class SignIn: UIViewController {
             .whereField("email", isEqualTo: email as Any)
             .whereField("password", isEqualTo: password as Any)
             .getDocuments { snapshot, err in
-            if let err = err{
-                print(err)
-                return
-            }
-            
-            guard let doc = snapshot?.documents else {
-                print("Nothing's here")
-                return
-            }
-            
-            if doc.first != nil{
-                print("available")
-                userdefs.set(email, forKey: "email")
-                userdefs.set(password, forKey: "password")
-                let alert = UIAlertController(title: "Success", message: "Successfully Logged In", preferredStyle: .alert)
-                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
+                if let err = err{
+                    print(err)
+                    return
+                }
+                
+                guard let doc = snapshot?.documents else {
+                    print("Nothing's here")
+                    return
+                }
+                
+                if doc.first != nil{
+                    print("available")
+                    userdefs.set(email, forKey: "email")
+                    userdefs.set(password, forKey: "password")
+                    //                let alert = UIAlertController(title: "Success", message: "Successfully Logged In", preferredStyle: .alert)
+                    //                let okayAction = UIAlertAction(title: "OK", style: .default){_ in
+                    //
+                    //                }
+                    //                alert.addAction(okayAction)
+                    //                self.present(alert, animated: true, completion: nil)
                     self.emailbox.text = ""
                     self.passwordbox.text = ""
                     self.tabBarActivate()
+                }else{
+                    print("not available")
+                    let alert = UIAlertController(title: "Error", message: "Loggin In Unsuccessful", preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okayAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
-                alert.addAction(okayAction)
-                self.present(alert, animated: true, completion: nil)
-                
-            }else{
-                print("not available")
-                let alert = UIAlertController(title: "Error", message: "Loggin In Unsuccessful", preferredStyle: .alert)
-                let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(okayAction)
-                self.present(alert, animated: true, completion: nil)
             }
-        }
     }
     
     func tabBarActivate(){
         let tabBarController = UITabBarController()
-    
+        
         let home = UINavigationController(rootViewController: ViewHomePage())
         let schedule = UINavigationController(rootViewController: ViewSchedulePage())
         let progress = UINavigationController(rootViewController: ViewProgressPage())
